@@ -14,7 +14,7 @@ class Produto{
     }
 
     public function ReajustarPreco($num3){
-        $this->preco += ($num3+$this->preco)/100;
+        $this->preco += ($num3*$this->preco)/100;
     }
 
 }
