@@ -5,16 +5,43 @@ class Produto{
     public $estoque;
     public $preco;
 
-    public function AumentarEstoque($num1){
-        $this->estoque += $num1;
+    public function AumentarEstoque(int $num1){
+        // condicional utlizada para controlar o limite máximo do estoque. 
+        if(($this->estoque+$num1 > 2000)){
+            echo ("erro! O valor informado é maior que o necessário no estoque!");
+        }else{
+            $this->estoque += $num1;
+        }
+    }
+
+    public function getDescricao(){
+        return $this->descricao;
+    }
+    public function setDescricao($descricao){
+        $this->descricao = $descricao;
     }
 
     public function DiminuirEstoque($num2){
-        $this->estoque -= $num2;
+        // condicional utilizada para não haver diminuição de estoque com valor 0.
+        if ($num2 <= 0){
+            echo ("Erro! Não é possível diminuir o estoque com a quantia 0 (zero)");
+        }
+        elseif ($num2 > $this->estoque){
+            echo("Erro! Não é possível diminuir o estoque além da quantidade já existente!");
+        }else{
+            $this->estoque -= $num2;
+        }
     }
 
     public function ReajustarPreco($num3){
+        // condicional utilizada para não haver reajuste de preço 0 e maior que 150%
+        if($num3 <= 0){
+            echo("Erro! Não é possível reajustar o valor(em porcentagem) com 0(zero)!");
+        }elseif ($num3 >= 150){
+            echo("Erro! Não é possível reajustar o valor em mais de 150% (PERIGO DE LAVAGEM DE DINHEIRO) ");
+        }else{
         $this->preco += ($num3*$this->preco)/100;
+        }
     }
 
 }
@@ -50,7 +77,8 @@ class Produto{
     echo " o preço do produto reajustado é ".$Produto->preco;
 
 
-
+echo $Produto->getProduto();
+$Produto->setProduto();
 
     
 
